@@ -1,0 +1,11 @@
+gradio
+PyPDF2
+sentence-transformers
+faiss-cpu
+transformers
+langchain
+langchain-community
+accelerate
+bitsandbytes
+fastapi
+uvicorn
