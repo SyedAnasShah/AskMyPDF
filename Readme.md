@@ -1,149 +1,166 @@
-📖 AI PDF Assistant
+# 📖 AI PDF Assistant
 
-An AI-powered PDF Question Answering Assistant that lets you upload PDFs, split them into chunks, and ask natural language questions about their contents.
+An **AI-powered PDF Question Answering Assistant** that lets you upload PDFs, split them into chunks, and ask **natural language questions** about their contents.  
 
-Built with cutting-edge tools for semantic search and retrieval-augmented generation (RAG).
+Built with cutting-edge tools for **semantic search and retrieval-augmented generation (RAG)**.  
 
-🚀 Key Features
+---
 
-📂 Smart PDF Processing
+## 🚀 Features
 
-Upload PDFs and extract text.
+### 📂 Smart PDF Processing
+- Upload PDFs and extract text.  
+- Splits large documents into manageable chunks.  
+- *(Note: Scanned PDFs without OCR are not supported by default).*  
 
-Handles large documents by splitting into manageable chunks.
+### 🔍 Semantic Search with FAISS
+- Embeddings stored in **FAISS** for fast similarity search.  
+- Powered by **Sentence-Transformers & LangChain**.  
 
-(Note: Scanned PDFs without OCR are not supported by default).
+### 🤖 Adaptive Question Answering
+- **Factual Mode** → strictly uses document context.  
+- **Creative Mode** → blends context with broader insights.  
 
-🔍 Semantic Search with FAISS
+### 🖥️ Two Interfaces
+- **Gradio UI** → Interactive web app.  
+- **FastAPI Endpoints** → REST API for programmatic access.  
 
-Store embeddings in FAISS for fast similarity search.
+### ⚡ Optimized for CPU & GPU
+- Runs on **CPU** out of the box.  
+- **GPU acceleration** recommended for faster embeddings & inference.  
 
-Powered by Sentence-Transformers & LangChain.
+---
 
-🤖 Adaptive Question Answering
+## 🏗️ Tech Stack
 
-Factual Mode → Strictly uses document context.
+- **LangChain** – Orchestration of LLM pipelines  
+- **Sentence-Transformers** – Embeddings  
+- **Hugging Face Transformers** – Q&A models  
+- **FAISS** – Vector database  
+- **Gradio** – Web UI  
+- **FastAPI** – REST API backend  
 
-Creative Mode → Blends document context with external insights.
+---
 
-🖥️ Two Interfaces
+## 📂 Project Structure
 
-Gradio UI → Interactive web app.
-
-FastAPI Endpoints → Programmatic access via REST API.
-
-⚡ Optimized for CPU & GPU
-
-Runs on CPU out of the box.
-
-GPU acceleration recommended for faster embedding + inference.
-
-🏗️ Tech Stack
-
-LangChain
- – Orchestration of LLM pipelines
-
-Sentence-Transformers
- – Embeddings
-
-Hugging Face Transformers
- – Q&A models
-
-FAISS
- – Vector database
-
-Gradio
- – Web UI
-
-FastAPI
- – REST API backend
-
-📂 Project Structure
+```bash
 .
 ├── app.py              # Main FastAPI + Gradio app
 ├── requirements.txt    # Python dependencies
 ├── Dockerfile          # Container setup
 ├── README.md           # Documentation
 └── uploaded_pdfs/      # Stored uploaded files
+```
 
-🟢 Running in Google Colab
+---
 
-This project can be run in Google Colab with ngrok tunneling for public access.
+## 🟢 Running in Google Colab
 
+This project can be run in **Google Colab** with **ngrok tunneling** for public access:
+
+```bash
 !pip install pyngrok gradio PyPDF2 sentence-transformers faiss-cpu transformers langchain langchain-community
+```
 
+After execution, you’ll get:
 
-Run the notebook → You’ll get two URLs:
+- 🌍 **FastAPI Public URL** → REST API access  
+- 🌍 **Gradio Public URL** → Web UI  
 
-🌍 FastAPI Public URL → REST API access
+---
 
-🌍 Gradio Public URL → Web UI
+## 🖥️ Running Locally
 
-🖥️ Running Locally (No Colab / ngrok)
-1️⃣ Install Requirements
+### 1️⃣ Install Requirements
+```bash
 python -m venv venv
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 
 pip install -r requirements.txt
+```
 
-2️⃣ Run the App
+### 2️⃣ Run the App
+```bash
 python app.py
+```
 
+- FastAPI → [http://localhost:8000](http://localhost:8000)  
+- Gradio → [http://localhost:7860](http://localhost:7860)  
 
-FastAPI API → http://localhost:8000
+---
 
-Gradio UI → http://localhost:7860
+## 🐳 Running with Docker
 
-🐳 Running with Docker
-
-Build and run the containerized app:
-
+```bash
 docker build -t pdf-assistant .
 docker run -p 8000:8000 -p 7860:7860 pdf-assistant
+```
 
-📡 FastAPI Endpoints
-Method	Endpoint	Description
-GET	/	Root health check
-GET	/status	Check DB readiness
-POST	/upload_pdf	Upload a PDF file
-POST	/ask_question	Ask a question (form-data: question)
+---
 
-Swagger UI → http://localhost:8000/docs
+## 📡 FastAPI Endpoints
 
-🎨 Gradio UI
+| Method | Endpoint        | Description                          |
+|--------|----------------|--------------------------------------|
+| GET    | `/`            | Root health check                    |
+| GET    | `/status`      | Check DB readiness                   |
+| POST   | `/upload_pdf`  | Upload a PDF file                    |
+| POST   | `/ask_question`| Ask a question (form-data: `question`)|
 
-Upload a PDF
+👉 Swagger UI → [http://localhost:8000/docs](http://localhost:8000/docs)  
 
-Ask questions interactively
+---
 
-👉 Accessible at http://localhost:7860
+## 🎨 Gradio UI
 
-📸 Example Screenshots
-Upload PDF
+1. Upload a PDF  
+2. Ask questions interactively  
 
-Ask a Question
+👉 Accessible at [http://localhost:7860](http://localhost:7860)  
 
-API Status
+---
 
-⚠️ Notes
+## 📸 Example Screenshots
 
-Scanned PDFs (image-based) require OCR (e.g., Tesseract) for text extraction.
+- **Upload PDF**  
+  ![Upload PDF](Screenshots/upload.png)  
 
-Default Q&A model → flan-t5-base (can be swapped with any Hugging Face model).
+- **Ask a Question**  
+  ![QA](Screenshots/QA.png)  
 
-⚡ GPU Support
+- **API Status**  
+  ![Status](Screenshots/status.png)  
 
-Highly recommended for large documents & fast inference.
+---
 
-Ensure CUDA is installed with PyTorch:
+## ⚠️ Notes
 
+- Scanned PDFs (image-based) require OCR (e.g., **Tesseract**) for text extraction.  
+- Default Q&A model → **flan-t5-base** (can be swapped with any Hugging Face model).  
+
+---
+
+## ⚡ GPU Support
+
+- **Recommended** for large documents & faster inference.  
+- Ensure CUDA is installed with PyTorch:  
+
+```bash
 pip install torch --index-url https://download.pytorch.org/whl/cu121
+```
 
-✨ Summary
+---
 
-With AI PDF Assistant, you can:
-✔️ Upload PDFs
-✔️ Query them in natural language
-✔️ Use either Web UI or API
-✔️ Run seamlessly on Colab, Local, or Docker
+## ✨ Summary
+
+With **AI PDF Assistant**, you can:  
+✔️ Upload PDFs  
+✔️ Query them in natural language  
+✔️ Use either **Web UI** or **API**  
+✔️ Run seamlessly on **Colab, Local, or Docker**  
+
+---
+
+⚡ Next Steps: Add **OCR support**, try **larger models**, or integrate with enterprise knowledge bases.  
