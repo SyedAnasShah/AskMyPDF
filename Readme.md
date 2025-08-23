@@ -1,42 +1,64 @@
-**AI PDF Assistant**
+📖 AI PDF Assistant
 
-AI-powered assistant that allows you to upload a PDF, split it into chunks and ask natural language questions about its contents.
+An AI-powered PDF Question Answering Assistant that lets you upload PDFs, split them into chunks, and ask natural language questions about their contents.
 
-Built with:
+Built with cutting-edge tools for semantic search and retrieval-augmented generation (RAG).
+
+🚀 Key Features
+
+📂 Smart PDF Processing
+
+Upload PDFs and extract text.
+
+Handles large documents by splitting into manageable chunks.
+
+(Note: Scanned PDFs without OCR are not supported by default).
+
+🔍 Semantic Search with FAISS
+
+Store embeddings in FAISS for fast similarity search.
+
+Powered by Sentence-Transformers & LangChain.
+
+🤖 Adaptive Question Answering
+
+Factual Mode → Strictly uses document context.
+
+Creative Mode → Blends document context with external insights.
+
+🖥️ Two Interfaces
+
+Gradio UI → Interactive web app.
+
+FastAPI Endpoints → Programmatic access via REST API.
+
+⚡ Optimized for CPU & GPU
+
+Runs on CPU out of the box.
+
+GPU acceleration recommended for faster embedding + inference.
+
+🏗️ Tech Stack
 
 LangChain
+ – Orchestration of LLM pipelines
 
 Sentence-Transformers
+ – Embeddings
 
 Hugging Face Transformers
+ – Q&A models
 
 FAISS
+ – Vector database
 
 Gradio
+ – Web UI
 
 FastAPI
+ – REST API backend
 
-🚀 **Features**
-
-Upload PDFs and extract text (ignores scanned PDFs without OCR).
-
-Split large documents into manageable chunks for embeddings.
-
-Store embeddings in FAISS for efficient semantic search.
-
-Adaptive question answering:
-
-Factual mode → strictly uses document context.
-
-Creative mode → blends context with broader insights.
-
-Two interfaces:
-
-Gradio UI (easy-to-use web app).
-
-FastAPI endpoints (programmatic access).
-
-📂 **Project Structure**
+📂 Project Structure
 .
 ├── app.py              # Main FastAPI + Gradio app
 ├── requirements.txt    # Python dependencies
@@ -44,44 +66,20 @@ FastAPI endpoints (programmatic access).
 ├── README.md           # Documentation
 └── uploaded_pdfs/      # Stored uploaded files
 
-🟢 **Running in Google Colab**
+🟢 Running in Google Colab
 
-You can run this project in Google Colab with ngrok tunneling enabled for public access.
+This project can be run in Google Colab with ngrok tunneling for public access.
 
-!pip install pyngrok
-!pip install -q --upgrade bitsandbytes
-!pip install -q --upgrade transformers
-!pip install gradio PyPDF2 sentence-transformers faiss-cpu transformers langchain pyngrok
-!pip install gradio PyPDF2 sentence-transformers faiss-cpu transformers langchain langchain-community pyngrok
-!pip install -q gradio PyPDF2 transformers accelerate sentence-transformers faiss-cpu bitsandbytes
-!pip install gradio PyPDF2 sentence-transformers faiss-cpu transformers langchain langchain-community pyngrok -q
-
-import gradio as gr
-import PyPDF2
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import FAISS
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.llms import HuggingFacePipeline
-from transformers import pipeline
-from pyngrok import ngrok
-import nest_asyncio
-import socket
-from fastapi import FastAPI, UploadFile, Form  
-import uvicorn                                 
-import threading
-import shutil
-import os
-
-# (Full Google Colab code here, using ngrok for tunnels)
+!pip install pyngrok gradio PyPDF2 sentence-transformers faiss-cpu transformers langchain langchain-community
 
 
-Once executed, it will print two URLs:
+Run the notebook → You’ll get two URLs:
 
 🌍 FastAPI Public URL → REST API access
 
 🌍 Gradio Public URL → Web UI
 
-🖥️ Running Locally (without Colab / ngrok)
+🖥️ Running Locally (No Colab / ngrok)
 1️⃣ Install Requirements
 python -m venv venv
 source venv/bin/activate   # Linux/Mac
@@ -105,57 +103,47 @@ docker build -t pdf-assistant .
 docker run -p 8000:8000 -p 7860:7860 pdf-assistant
 
 📡 FastAPI Endpoints
-
-GET / → Root health check
-
-GET /status → Check DB readiness
-
-POST /upload_pdf → Upload a PDF file
-
-POST /ask_question → Ask a question (form-data field: question)
+Method	Endpoint	Description
+GET	/	Root health check
+GET	/status	Check DB readiness
+POST	/upload_pdf	Upload a PDF file
+POST	/ask_question	Ask a question (form-data: question)
 
 Swagger UI → http://localhost:8000/docs
 
 🎨 Gradio UI
 
-Two-step interface:
-
-Upload PDF
+Upload a PDF
 
 Ask questions interactively
 
-Accessible at → http://localhost:7860
+👉 Accessible at http://localhost:7860
 
+📸 Example Screenshots
+Upload PDF
 
-## 📸 Example Screenshots
+Ask a Question
 
-- **Upload PDF**
-  
-  ![Upload PDF](Screenshots/upload.png)
-
-- **Ask a Question**
-  
-  ![Question Answer](Screenshots/QA.png)
-
-- **API Status Check**
-  
-  ![API Status](Screenshots/status.png)
-
+API Status
 
 ⚠️ Notes
 
-Scanned PDFs (images) won’t work unless you add OCR (e.g., Tesseract).
+Scanned PDFs (image-based) require OCR (e.g., Tesseract) for text extraction.
 
-Uses flan-t5-base for Q&A (can replace with other Hugging Face models).
+Default Q&A model → flan-t5-base (can be swapped with any Hugging Face model).
 
-## ⚡ GPU Support
+⚡ GPU Support
 
-This project runs on both **CPU** and **GPU**.  
-- Running on **GPU** is highly recommended for faster embeddings and question answering.  
-- Make sure you have CUDA installed with PyTorch:
+Highly recommended for large documents & fast inference.
 
-```bash
+Ensure CUDA is installed with PyTorch:
+
 pip install torch --index-url https://download.pytorch.org/whl/cu121
 
+✨ Summary
 
-✨ That’s it! Now you can run the AI PDF Assistant in Colab (with ngrok) or locally (FastAPI + Gradio).
+With AI PDF Assistant, you can:
+✔️ Upload PDFs
+✔️ Query them in natural language
+✔️ Use either Web UI or API
+✔️ Run seamlessly on Colab, Local, or Docker
