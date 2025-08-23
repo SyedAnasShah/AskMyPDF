@@ -1,4 +1,4 @@
-AI PDF Assistant
+**AI PDF Assistant**
 
 AI-powered assistant that allows you to upload a PDF, split it into chunks and ask natural language questions about its contents.
 
@@ -16,7 +16,7 @@ Gradio
 
 FastAPI
 
-🚀 Features
+🚀 **Features**
 
 Upload PDFs and extract text (ignores scanned PDFs without OCR).
 
@@ -36,7 +36,7 @@ Gradio UI (easy-to-use web app).
 
 FastAPI endpoints (programmatic access).
 
-📂 Project Structure
+📂 **Project Structure**
 .
 ├── app.py              # Main FastAPI + Gradio app
 ├── requirements.txt    # Python dependencies
@@ -44,7 +44,7 @@ FastAPI endpoints (programmatic access).
 ├── README.md           # Documentation
 └── uploaded_pdfs/      # Stored uploaded files
 
-🟢 Running in Google Colab
+🟢 **Running in Google Colab**
 
 You can run this project in Google Colab with ngrok tunneling enabled for public access.
 
